@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .item { padding: 10px; border-bottom: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <p style="font-size:50px">The infinite List</p>
+    "You will <i>never</i> see the bottom of this list..."<Br><br><br>
+    <div id="content"></div>
+    <script>
+        let items = 0;
+        const content = document.getElementById('content');
+
+        function loadMoreItems() {
+            for (let i = 0; i < 100; i++) {
+                const item = document.createElement('div');
+                item.className = 'item';
+                item.textContent = `Item ${items + i + 1}`;
+                content.appendChild(item);
+            }
+            items += 101;
+        }
+
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                loadMoreItems();
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        loadMoreItems();
+    </script>
+</body>
+</html>
+
